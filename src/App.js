@@ -1,10 +1,26 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
 
 // Components
+import AddTask from './components/AddTask';
+import TaskList from './components/TaskList';
 
+// Initial State
+const defaultTasks = [{name: 'Milk', complete: false}, {name: 'Eggs', complete: false}, {name: 'Bread', complete: false}]
 
 function App() {
+  const [taskList, setTaskList] = useState(defaultTasks);
+
+  // Local Function
+  const addTask = (newTask) => {
+    setTaskList([...taskList, newTask]);
+  }
+
+  const deleteTask = (deletedTask) => {
+    const newTaskList = taskList.filter(task => task !== deletedTask)
+    setTaskList(newTaskList);
+  }
+
   return (
     <div className="App">
       <header>
@@ -14,13 +30,8 @@ function App() {
       </header>
       <section>
         <div className='container'>
-          <form>
-            <input
-              type='text'
-              name='task'
-              className='taskInput'
-            />
-          </form>
+          <AddTask addTask={addTask}/>
+          <TaskList taskList={taskList} deleteTask={deleteTask}/>
         </div>
       </section>
     </div>
