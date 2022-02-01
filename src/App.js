@@ -32,15 +32,6 @@ function App() {
     }
   }
 
-  const addTask = (newTask) => {
-    setTaskList([...taskList, newTask]);
-  }
-
-  const deleteTask = (deletedTask) => {
-    const newTaskList = taskList.filter(task => task !== deletedTask)
-    setTaskList(newTaskList);
-  }
-
   // DOM
   return (
     <div className="App">
@@ -51,7 +42,7 @@ function App() {
       </header>
       <section>
         <div className='container'>
-          <AddTask addTask={addTask}/>
+          <AddTask taskList={taskList} setTaskList={setTaskList}/>
           <TaskList taskList={taskList} setTaskList={setTaskList}/>
         </div>
       </section>

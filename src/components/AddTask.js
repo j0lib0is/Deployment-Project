@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 const AddTask = (props) => {
 
   // Destructure Props
-  const { addTask } = props;
+  const { taskList, setTaskList } = props;
 
   // State
   const [task, setTask] = useState({
@@ -21,7 +21,7 @@ const AddTask = (props) => {
 
   const handleSubmit = e => {
     e.preventDefault();
-    addTask(task);
+    setTaskList([...taskList, task]);
     setTask({
       ...task,
       name: '',
