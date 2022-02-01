@@ -5,12 +5,9 @@ import './App.css';
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
 
-// Initial State
-const defaultTasks = [{name: 'Milk', complete: false}, {name: 'Eggs', complete: false}, {name: 'Bread', complete: false}]
-
 function App() {
   // State
-  const [taskList, setTaskList] = useState(defaultTasks);
+  const [taskList, setTaskList] = useState([]);
   // const [completedTasks, setCompletedTasks] = useState([]);
 
   // Local Functions

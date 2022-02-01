@@ -1,7 +1,8 @@
 import React from 'react';
 
 // Components
-import Task from './Task'
+import Task from './Task';
+import EmptyState from './EmptyState';
 
 const TaskList = (props) => {
 
@@ -10,11 +11,16 @@ const TaskList = (props) => {
 	
 	// Return
 	return (
-		<ul className='taskList'>
-			{taskList.map((task) => {
-				return <Task taskList={taskList} task={task} setTaskList={setTaskList} key={task.name}/>;
-			})}
-		</ul>
+		<div className='taskList'>
+			{taskList.length === 0
+				? <EmptyState/>
+				: <ul className='taskList'>
+					{taskList.map((task) => {
+						return <Task taskList={taskList} task={task} setTaskList={setTaskList} key={task.name}/>;
+					})}
+				</ul>
+			}
+		</div>
 	);
 }
 
