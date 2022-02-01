@@ -7,7 +7,7 @@ import deleteIcon from '../Assets/delete.svg';
 const Task = (props) => {
 
 	// Destructure Props
-	const { task, deleteTask } = props;
+	const { taskList, task, setTaskList } = props;
 
 	// State
 	const [taskState, setTaskState] = useState(task);
@@ -21,7 +21,7 @@ const Task = (props) => {
 	}
 
 	const handleDelete = () => {
-		deleteTask(task);
+    	setTaskList(taskList.filter(item => item !== task));
 	}
 	
 	// Return

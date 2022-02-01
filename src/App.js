@@ -11,7 +11,7 @@ const defaultTasks = [{name: 'Milk', complete: false}, {name: 'Eggs', complete: 
 function App() {
   // State
   const [taskList, setTaskList] = useState(defaultTasks);
-  const [completedTasks, setCompletedTasks] = useState([]);
+  // const [completedTasks, setCompletedTasks] = useState([]);
 
   // Local Functions
   useEffect(() => {
@@ -21,10 +21,6 @@ function App() {
   useEffect(() => {
     saveTasksLocally();
   }, [taskList]);
-
-  const addTask = (newTask) => {
-    setTaskList([...taskList, newTask]);
-  }
 
   const saveTasksLocally = () => {
     localStorage.setItem('tasks', JSON.stringify(taskList));
@@ -37,6 +33,10 @@ function App() {
       const localTasks = JSON.parse(localStorage.getItem('tasks'));
       setTaskList(localTasks);
     }
+  }
+
+  const addTask = (newTask) => {
+    setTaskList([...taskList, newTask]);
   }
 
   const deleteTask = (deletedTask) => {
@@ -55,7 +55,7 @@ function App() {
       <section>
         <div className='container'>
           <AddTask addTask={addTask}/>
-          <TaskList taskList={taskList} deleteTask={deleteTask}/>
+          <TaskList taskList={taskList} setTaskList={setTaskList}/>
         </div>
       </section>
     </div>
