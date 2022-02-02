@@ -6,27 +6,21 @@ const AddTask = (props) => {
   const { taskList, setTaskList } = props;
 
   // State
-  const [task, setTask] = useState({
-    name: '',
-    complete: false,
-  });
+  const [input, setInput] = useState('');
 
   // Local Functions
   const handleChange = e => {
-    setTask({
-      ...task,
-      [e.target.name]: e.target.value
-    });
+    setInput(e.target.value);
   }
 
   const handleSubmit = e => {
     e.preventDefault();
-    setTaskList([...taskList, task]);
-    setTask({
-      ...task,
-      name: '',
+    setTaskList([...taskList, {
+      name: input,
       complete: false,
-    });
+      id: Math.random() * 1000
+    }]);
+    setInput('');
   }
 
   // Return
@@ -35,7 +29,7 @@ const AddTask = (props) => {
       <input
         type='text'
         name='name'
-        value={task.name}
+        value={input}
         onChange={handleChange}
         className='taskInput'
       />

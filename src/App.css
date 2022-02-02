@@ -213,6 +213,7 @@ nav .logo {
 }
 .taskDiv li {
 	flex: 1;
+	padding: 0px 8px;
 }
 .completeButton,
 .deleteButton {
@@ -235,6 +236,10 @@ nav .logo {
 }
 
 /*Filter Styles*/
+.filterWrapper {
+	width: 100%;
+	margin-top: 8px;
+}
 select {
 	-webkit-appearance: none;
 	-moz-appearance: none;
@@ -243,6 +248,7 @@ select {
 	box-shadow: none;
 	border: none;
 	width: 100%;
+	padding: 0px 8px;
 	cursor: pointer;
 	color: #aaa;
 }

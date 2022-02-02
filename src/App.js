@@ -4,25 +4,15 @@ import './App.css';
 // Components
 import AddTask from './components/AddTask';
 import TaskList from './components/TaskList';
+import StatusFilter from './components/StatusFilter';
 
 function App() {
   // State
   const [taskList, setTaskList] = useState([]);
-  // const [completedTasks, setCompletedTasks] = useState([]);
+  const [shownTasks, setShownTasks] = useState([]);
+  const [status, setStatus] = useState('all');
 
-  // Local Functions
-  useEffect(() => {
-    getLocalTasks();
-  }, []);
-
-  useEffect(() => {
-    saveTasksLocally();
-  }, [taskList]);
-
-  const saveTasksLocally = () => {
-    localStorage.setItem('tasks', JSON.stringify(taskList));
-  }
-
+  // Get Tasks from Local Storage
   const getLocalTasks = () => {
     if (localStorage.getItem('tasks') === null) {
       localStorage.setItem('tasks', JSON.stringify([]));
@@ -31,6 +21,38 @@ function App() {
       setTaskList(localTasks);
     }
   }
+
+  useEffect(() => {
+    getLocalTasks();
+  }, []);
+
+  // Save Tasks to Local Storage
+  const saveTasksLocally = () => {
+    localStorage.setItem('tasks', JSON.stringify(taskList));
+  }
+
+  useEffect(() => {
+    saveTasksLocally();
+  }, [taskList]);
+
+  // Filter Tasks by Status
+  const filterByStatus = () => {
+    switch(status) {
+      case 'complete':
+        setShownTasks(taskList.filter(task => task.complete === true));
+        break;
+      case 'incomplete':
+        setShownTasks(taskList.filter(task => task.complete === false));
+        break;
+      default:
+        setShownTasks(taskList);
+        break;
+    }
+  }
+
+  useEffect(() => {
+    filterByStatus();
+  }, [taskList, status]);
 
   // DOM
   return (
@@ -42,8 +64,9 @@ function App() {
       </header>
       <section>
         <div className='container'>
-          <AddTask taskList={taskList} setTaskList={setTaskList}/>
-          <TaskList taskList={taskList} setTaskList={setTaskList}/>
+          <AddTask taskList={taskList} setTaskList={setTaskList} />
+          {taskList.length === 0 ? '' : <StatusFilter setStatus={setStatus} />}
+          <TaskList shownTasks={shownTasks} setTaskList={setTaskList} />
         </div>
       </section>
     </div>

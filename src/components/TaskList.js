@@ -7,16 +7,16 @@ import EmptyState from './EmptyState';
 const TaskList = (props) => {
 
 	// Destructure Props
-	const { taskList, setTaskList, deleteTask } = props;
+	const { shownTasks, setTaskList } = props;
 	
 	// Return
 	return (
 		<div className='taskList'>
-			{taskList.length === 0
+			{shownTasks.length === 0
 				? <EmptyState/>
 				: <ul className='taskList'>
-					{taskList.map((task) => {
-						return <Task taskList={taskList} task={task} setTaskList={setTaskList} key={task.name}/>;
+					{shownTasks.map((task) => {
+						return <Task shownTasks={shownTasks} task={task} setTaskList={setTaskList} key={task.id}/>;
 					})}
 				</ul>
 			}
