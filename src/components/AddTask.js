@@ -18,7 +18,7 @@ const AddTask = (props) => {
     setTaskList([...taskList, {
       name: input,
       complete: false,
-      id: Math.random() * 1000
+      id: Math.floor(Math.random() * 1000)
     }]);
     setInput('');
   }

@@ -13,44 +13,41 @@ function App() {
   const [status, setStatus] = useState('all');
 
   // Get Tasks from Local Storage
-  const getLocalTasks = () => {
-    if (localStorage.getItem('tasks') === null) {
-      localStorage.setItem('tasks', JSON.stringify([]));
-    } else {
-      const localTasks = JSON.parse(localStorage.getItem('tasks'));
-      setTaskList(localTasks);
-    }
-  }
-
   useEffect(() => {
+    const getLocalTasks = () => {
+      if (localStorage.getItem('tasks') === null) {
+        localStorage.setItem('tasks', JSON.stringify([]));
+      } else {
+        const localTasks = JSON.parse(localStorage.getItem('tasks'));
+        setTaskList(localTasks);
+      }
+    };
     getLocalTasks();
   }, []);
 
   // Save Tasks to Local Storage
-  const saveTasksLocally = () => {
-    localStorage.setItem('tasks', JSON.stringify(taskList));
-  }
-
   useEffect(() => {
+    const saveTasksLocally = () => {
+      localStorage.setItem('tasks', JSON.stringify(taskList));
+    };
     saveTasksLocally();
   }, [taskList]);
 
   // Filter Tasks by Status
-  const filterByStatus = () => {
-    switch(status) {
-      case 'complete':
-        setShownTasks(taskList.filter(task => task.complete === true));
-        break;
-      case 'incomplete':
-        setShownTasks(taskList.filter(task => task.complete === false));
-        break;
-      default:
-        setShownTasks(taskList);
-        break;
-    }
-  }
-
   useEffect(() => {
+    const filterByStatus = () => {
+      switch(status) {
+        case 'complete':
+          setShownTasks(taskList.filter(task => task.complete === true));
+          break;
+        case 'incomplete':
+          setShownTasks(taskList.filter(task => task.complete === false));
+          break;
+        default:
+          setShownTasks(taskList);
+          break;
+      }
+    };
     filterByStatus();
   }, [taskList, status]);
 
