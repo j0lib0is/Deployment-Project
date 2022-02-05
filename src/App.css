@@ -179,6 +179,7 @@ nav .logo {
 .taskForm {
 	width: 100%;
 	display: flex;
+	flex-wrap: wrap;
 }
 .taskInput {
 	flex-grow: 1;
@@ -239,6 +240,9 @@ nav .logo {
 .filterWrapper {
 	width: 100%;
 	margin-top: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
 }
 select {
 	-webkit-appearance: none;
@@ -250,14 +254,15 @@ select {
 	width: 100%;
 	padding: 0px 8px;
 	cursor: pointer;
+	background-color: white;
 	color: #aaa;
 }
-.filter {
+/* .filter {
 	position: relative;
 	width: 100%;
 	margin: 8px;
 	padding: 4px;
-}
+} */
 
 .empty-wrapper {
 	width: 100%;
@@ -268,4 +273,21 @@ select {
 	display: flex;
 	align-items: center;
 	justify-content: center;
+}
+
+@media only screen and (max-width: 600px) {
+	.taskForm {
+		flex-direction: column;
+	}
+	.taskInput {
+		flex-grow: 1;
+	}
+	.taskSubmit {
+		margin-left: 0px;
+		margin-top: 8px;
+		padding: 16px 8px;
+	}
+	.statusFilter {
+		padding: 4px 8px;
+	}
 }

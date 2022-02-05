@@ -10,7 +10,7 @@ function App() {
   // State
   const [taskList, setTaskList] = useState([]);
   const [shownTasks, setShownTasks] = useState([]);
-  const [status, setStatus] = useState('all');
+  const [status, setStatus] = useState('incomplete');
 
   // Get Tasks from Local Storage
   useEffect(() => {

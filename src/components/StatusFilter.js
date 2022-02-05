@@ -1,5 +1,8 @@
 import React from 'react';
 
+// Assets
+import ArrowIcon from '../Assets/angle-down.svg';
+
 const StatusFilter = (props) => {
 	
 	// Destructure Props
@@ -18,6 +21,7 @@ const StatusFilter = (props) => {
 				<option value='complete'>Completed Tasks</option>
 				<option value='incomplete'>Incomplete Tasks</option>
 			</select>
+			<img src={ArrowIcon} alt='down arrow icon'/>
 		</div>
 	);
 }
