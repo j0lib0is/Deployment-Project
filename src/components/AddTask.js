@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { useState } from 'react';
 
 const AddTask = (props) => {
@@ -6,21 +7,38 @@ const AddTask = (props) => {
   const { taskList, setTaskList } = props;
 
   // State
-  const [input, setInput] = useState('');
+  const [task, setTask] = useState({
+    name: '',
+    complete: false,
+    id: Math.floor(Math.random() * 1000)
+    });
 
   // Local Functions
   const handleChange = e => {
-    setInput(e.target.value);
+    setTask({
+      ...task,
+      name: e.target.value
+    });
   }
 
   const handleSubmit = e => {
     e.preventDefault();
-    setTaskList([...taskList, {
-      name: input,
-      complete: false,
-      id: Math.floor(Math.random() * 1000)
-    }]);
-    setInput('');
+    // setTaskList([...taskList, {
+    //   name: input,
+    //   complete: false,
+    //   id: Math.floor(Math.random() * 1000)
+    // }]);
+    // setInput('');
+
+    axios.post('https://tasker-app-api.herokuapp.com/api/tasks', task)
+      .then(res => {
+        setTaskList([...taskList, task]);
+      })
+      .catch(err => console.error(err));
+    setTask({
+      ...task,
+      name: '',
+    })
   }
 
   // Return
@@ -29,7 +47,7 @@ const AddTask = (props) => {
       <input
         type='text'
         name='name'
-        value={input}
+        value={task.name}
         onChange={handleChange}
         className='taskInput'
       />

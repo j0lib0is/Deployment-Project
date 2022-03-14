@@ -1,8 +1,10 @@
 import React from 'react';
+import axios from 'axios';
 
 // Assets
 import completeIcon from '../Assets/complete.svg';
 import deleteIcon from '../Assets/delete.svg';
+import TaskList from './TaskList';
 
 const Task = (props) => {
 
@@ -23,7 +25,13 @@ const Task = (props) => {
 	}
 
 	const handleDelete = () => {
-    	setTaskList(shownTasks.filter(item => item !== task));
+    	// setTaskList(shownTasks.filter(item => item !== task));
+			
+			axios.delete('https://tasker-app-api.herokuapp.com/api/tasks')
+				.then(res => {
+					setTaskList(TaskList.filter(item => item !== task));
+				})
+				.catch(err => console.error(err));
 	}
 	
 	// Return

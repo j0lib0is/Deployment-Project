@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import './App.css';
 
 // Components
@@ -12,26 +13,37 @@ function App() {
   const [shownTasks, setShownTasks] = useState([]);
   const [status, setStatus] = useState('incomplete');
 
-  // Get Tasks from Local Storage
+  // Get Tasks
   useEffect(() => {
-    const getLocalTasks = () => {
-      if (localStorage.getItem('tasks') === null) {
-        localStorage.setItem('tasks', JSON.stringify([]));
-      } else {
-        const localTasks = JSON.parse(localStorage.getItem('tasks'));
-        setTaskList(localTasks);
-      }
-    };
-    getLocalTasks();
+    // const getLocalTasks = () => {
+    //   if (localStorage.getItem('tasks') === null) {
+    //     localStorage.setItem('tasks', JSON.stringify([]));
+    //   } else {
+    //     const localTasks = JSON.parse(localStorage.getItem('tasks'));
+    //     setTaskList(localTasks);
+    //   }
+    // };
+
+    // getLocalTasks();
+
+    const getTasks = () => {
+      axios.get('https://tasker-app-api.herokuapp.com/api/tasks')
+        .then(tasks => {
+          setTaskList(tasks);
+        })
+        .catch(err => console.error(err));
+    }
+
+    getTasks();
   }, []);
 
   // Save Tasks to Local Storage
-  useEffect(() => {
-    const saveTasksLocally = () => {
-      localStorage.setItem('tasks', JSON.stringify(taskList));
-    };
-    saveTasksLocally();
-  }, [taskList]);
+  // useEffect(() => {
+  //   const saveTasksLocally = () => {
+  //     localStorage.setItem('tasks', JSON.stringify(taskList));
+  //   };
+  //   saveTasksLocally();
+  // }, [taskList]);
 
   // Filter Tasks by Status
   useEffect(() => {
